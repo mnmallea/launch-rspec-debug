@@ -9,6 +9,16 @@
 	"categories": [
 		"Other"
 	],
+	"publisher": "mnmallea",
+	"author": {
+		"name": "Martín Mallea",
+		"url": "https://github.com/mnmallea",
+		"email": "mnmallea@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mnmallea/launch-rspec-debug"
+	},
 	"activationEvents": [
 		"onCommand:extension.runActiveSpec",
 		"onCommand:extension.runActiveSpecAtLine",
@@ -30,15 +40,6 @@
 				"title": "Rspec Debug: Run All Specs in Project"
 			}
 		]
-	},
-	"author": {
-		"name": "Martín Mallea",
-		"url": "https://github.com/mnmallea",
-		"email": "mnmallea@gmail.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/mnmallea/launch-rspec-debug"
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
