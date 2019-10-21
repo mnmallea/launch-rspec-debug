@@ -1,17 +1,9 @@
 "use strict";
 
 import * as vscode from "vscode";
-import { debug } from "util";
 
 export function runSpecFile() {
-    const debugConfiguration: vscode.DebugConfiguration = {
-        type: 'Ruby',
-        name: 'Launch',
-        request: 'launch',
-        program: pathToBundler(),
-        args: ['exec', 'rspec', '-fd', '${file}']
-    };
-    vscode.debug.startDebugging(currentFolder, debugConfiguration);
+    vscode.debug.startDebugging(currentFolder, buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true }));
 }
 
 export function runSpecFileAtCurrentLine() {
@@ -19,19 +11,34 @@ export function runSpecFileAtCurrentLine() {
 
     const line: number = vscode.window.activeTextEditor.selection.active.line;
 
-    const debugConfiguration: vscode.DebugConfiguration = {
-        type: 'Ruby',
-        name: 'Launch',
-        request: 'launch',
-        program: pathToBundler(),
-        args: ['exec', 'rspec', '-fd', '${file}:' + line.toString()]
-    };
-    vscode.debug.startDebugging(currentFolder, debugConfiguration);
+    vscode.debug.startDebugging(currentFolder, buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true, line }));
+}
+
+export function runAllSpecsInProject() {
+    vscode.debug.startDebugging(currentFolder, buildDebugConfiguration({ bundlerPath: pathToBundler() }));
 }
 
 const currentFolder: vscode.WorkspaceFolder | undefined = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0] : undefined;
 
 function pathToBundler(): string { //TODO: parametrize path to bundler
     return '${workspaceRoot}/bin/bundle';
+}
+
+function buildDebugConfiguration(options: DebugOptions): vscode.DebugConfiguration {
+    return {
+        type: 'Ruby',
+        name: 'Launch',
+        request: 'launch',
+        program: options.bundlerPath,
+        args: ['exec', 'rspec', '-fd',
+            options.currentFile ? options.line ? `\${file}:${options.line}` : '${file}' : null]
+            .filter(x => x)
+    };
+}
+
+interface DebugOptions {
+    bundlerPath: string;
+    currentFile?: boolean;
+    line?: number;
 }
 

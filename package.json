@@ -11,7 +11,8 @@
 	],
 	"activationEvents": [
 		"onCommand:extension.runActiveSpec",
-		"onCommand:extension.runActiveSpecAtLine"
+		"onCommand:extension.runActiveSpecAtLine",
+		"onCommand:extension.runAllSpecs"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -23,6 +24,10 @@
 			{
 				"command": "extension.runActiveSpecAtLine",
 				"title": "Rspec Debug: Debug Active Spec at current line"
+			},
+			{
+				"command": "extension.runAllSpecs",
+				"title": "Rspec Debug: Run All Specs in Project"
 			}
 		]
 	},
