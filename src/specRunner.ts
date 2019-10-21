@@ -8,9 +8,30 @@ export function runSpecFile() {
         type: 'Ruby',
         name: 'Launch',
         request: 'launch',
-        program: 'bundle',
+        program: pathToBundler(),
         args: ['exec', 'rspec', '-fd', '${file}']
-    }
-    const folder: vscode.WorkspaceFolder | undefined = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0] : undefined
-    vscode.debug.startDebugging(folder, debugConfiguration)
+    };
+    vscode.debug.startDebugging(currentFolder, debugConfiguration);
 }
+
+export function runSpecFileAtCurrentLine() {
+    if (!vscode.window.activeTextEditor) { return; }
+
+    const line: number = vscode.window.activeTextEditor.selection.active.line;
+
+    const debugConfiguration: vscode.DebugConfiguration = {
+        type: 'Ruby',
+        name: 'Launch',
+        request: 'launch',
+        program: pathToBundler(),
+        args: ['exec', 'rspec', '-fd', '${file}:' + line.toString()]
+    };
+    vscode.debug.startDebugging(currentFolder, debugConfiguration);
+}
+
+const currentFolder: vscode.WorkspaceFolder | undefined = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0] : undefined;
+
+function pathToBundler(): string { //TODO: parametrize path to bundler
+    return '${workspaceRoot}/bin/bundle';
+}
+
