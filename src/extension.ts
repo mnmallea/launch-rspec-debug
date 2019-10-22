@@ -11,9 +11,9 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "rspec-debug" is now active!');
 
-	context.subscriptions.push(vscode.commands.registerCommand('extension.runActiveSpec', runSpecFile));
-	context.subscriptions.push(vscode.commands.registerCommand('extension.runActiveSpecAtLine', runSpecFileAtCurrentLine));
-	context.subscriptions.push(vscode.commands.registerCommand('extension.runAllSpecs', runAllSpecsInProject));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runActiveSpec', runSpecFile));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runActiveSpecAtLine', runSpecFileAtCurrentLine));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runAllSpecs', runAllSpecsInProject));
 }
 
 // this method is called when your extension is deactivated

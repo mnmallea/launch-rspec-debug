@@ -20,23 +20,23 @@
 		"url": "https://github.com/mnmallea/launch-rspec-debug"
 	},
 	"activationEvents": [
-		"onCommand:extension.runActiveSpec",
-		"onCommand:extension.runActiveSpecAtLine",
-		"onCommand:extension.runAllSpecs"
+		"onCommand:rspec-debug.runActiveSpec",
+		"onCommand:rspec-debug.runActiveSpecAtLine",
+		"onCommand:rspec-debug.runAllSpecs"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.runActiveSpec",
+				"command": "rspec-debug.runActiveSpec",
 				"title": "Rspec Debug: Debug Active Spec File"
 			},
 			{
-				"command": "extension.runActiveSpecAtLine",
+				"command": "rspec-debug.runActiveSpecAtLine",
 				"title": "Rspec Debug: Debug Active Spec at current line"
 			},
 			{
-				"command": "extension.runAllSpecs",
+				"command": "rspec-debug.runAllSpecs",
 				"title": "Rspec Debug: Run All Specs in Project"
 			}
 		]
