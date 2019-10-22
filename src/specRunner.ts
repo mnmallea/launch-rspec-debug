@@ -30,9 +30,9 @@ function buildDebugConfiguration(options: DebugOptions): vscode.DebugConfigurati
         name: 'Launch',
         request: 'launch',
         program: options.bundlerPath,
-        args: ['exec', 'rspec', '-fd',
+        args: ['exec', 'rspec', '--force-color', '-fd',
             options.currentFile ? options.line ? `\${file}:${options.line}` : '${file}' : null]
-            .filter(x => x)
+            .filter(Boolean)
     };
 }
 
