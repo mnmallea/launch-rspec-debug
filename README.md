@@ -11,7 +11,7 @@ This is a Plugin designed to launch RSpec specs files in VSCode Debug Console.
 ## Requirements
 
 You need `ruby-debug-ide` gem installed to run the debugger.
-You could use `gem install ruby-debug-ide` or add `gem ruby-debug-ide` to your `Gemfile`.
+You could use `gem install ruby-debug-ide` or add `gem 'ruby-debug-ide'` to your `Gemfile`.
 
 ## Extension Settings
 
