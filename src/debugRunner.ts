@@ -2,9 +2,10 @@
 
 import * as vscode from "vscode";
 import { testStatus } from './testStatus';
+import { bundlerPath } from './configuration';
 
 export function runSpecFile() {
-    runConfiguration(buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true }));
+    runConfiguration(buildDebugConfiguration({ currentFile: true }));
 }
 
 export function runSpecFileAtCurrentLine() {
@@ -12,11 +13,11 @@ export function runSpecFileAtCurrentLine() {
 
     const line: number = vscode.window.activeTextEditor.selection.active.line;
 
-    runConfiguration(buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true, line }));
+    runConfiguration(buildDebugConfiguration({ currentFile: true, line }));
 }
 
 export function runAllSpecsInProject() {
-    runConfiguration(buildDebugConfiguration({ bundlerPath: pathToBundler() }));
+    runConfiguration(buildDebugConfiguration());
 }
 
 export function runLastConfiguration() {
@@ -34,16 +35,14 @@ function runConfiguration(configuration: vscode.DebugConfiguration) {
 
 const currentFolder: vscode.WorkspaceFolder | undefined = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0] : undefined;
 
-function pathToBundler(): string { //TODO: parametrize path to bundler
-    return '${workspaceRoot}/bin/bundle';
-}
 
-function buildDebugConfiguration(options: DebugOptions): vscode.DebugConfiguration {
+
+function buildDebugConfiguration(options: DebugOptions = {}): vscode.DebugConfiguration {
     return {
         type: 'Ruby',
         name: 'Launch',
         request: 'launch',
-        program: options.bundlerPath,
+        program: options.bundlerPath || bundlerPath(),
         args: ['exec', 'rspec', '--force-color', '-fd',
             options.currentFile ? options.line ? `\${file}:${options.line}` : '${file}' : null]
             .filter(Boolean)
@@ -51,7 +50,7 @@ function buildDebugConfiguration(options: DebugOptions): vscode.DebugConfigurati
 }
 
 interface DebugOptions {
-    bundlerPath: string;
+    bundlerPath?: string;
     currentFile?: boolean;
     line?: number;
 }
