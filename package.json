@@ -22,22 +22,27 @@
 	"activationEvents": [
 		"onCommand:rspec-debug.runActiveSpec",
 		"onCommand:rspec-debug.runActiveSpecAtLine",
-		"onCommand:rspec-debug.runAllSpecs"
+		"onCommand:rspec-debug.runAllSpecs",
+		"onCommand:rspec-debug.runLastConfiguration"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "rspec-debug.runActiveSpec",
-				"title": "Rspec Debug: Debug Active Spec File"
+				"title": "Rspec Debug: Debug active spec File"
 			},
 			{
 				"command": "rspec-debug.runActiveSpecAtLine",
-				"title": "Rspec Debug: Debug Active Spec at current line"
+				"title": "Rspec Debug: Debug active spec at current line"
 			},
 			{
 				"command": "rspec-debug.runAllSpecs",
-				"title": "Rspec Debug: Run All Specs in Project"
+				"title": "Rspec Debug: Run all specs in Project"
+			},
+			{
+				"command": "rspec-debug.runLastConfiguration",
+				"title": "Rspec Debug: Run last configuration"
 			}
 		]
 	},

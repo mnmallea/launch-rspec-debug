@@ -1,9 +1,10 @@
 "use strict";
 
 import * as vscode from "vscode";
+import { testStatus } from './testStatus';
 
 export function runSpecFile() {
-    vscode.debug.startDebugging(currentFolder, buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true }));
+    runConfiguration(buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true }));
 }
 
 export function runSpecFileAtCurrentLine() {
@@ -11,11 +12,24 @@ export function runSpecFileAtCurrentLine() {
 
     const line: number = vscode.window.activeTextEditor.selection.active.line;
 
-    vscode.debug.startDebugging(currentFolder, buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true, line }));
+    runConfiguration(buildDebugConfiguration({ bundlerPath: pathToBundler(), currentFile: true, line }));
 }
 
 export function runAllSpecsInProject() {
-    vscode.debug.startDebugging(currentFolder, buildDebugConfiguration({ bundlerPath: pathToBundler() }));
+    runConfiguration(buildDebugConfiguration({ bundlerPath: pathToBundler() }));
+}
+
+export function runLastConfiguration() {
+    if (testStatus.lastConfiguration) {
+        runConfiguration(testStatus.lastConfiguration);
+    } else {
+        vscode.window.showErrorMessage('Last configuration doesn´t exist');
+    }
+}
+
+function runConfiguration(configuration: vscode.DebugConfiguration) {
+    vscode.debug.startDebugging(currentFolder, configuration);
+    testStatus.lastConfiguration = configuration;
 }
 
 const currentFolder: vscode.WorkspaceFolder | undefined = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0] : undefined;
