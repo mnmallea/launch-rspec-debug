@@ -22,6 +22,8 @@ export function runAllSpecsInProject() {
 export function runLastConfiguration() {
     if (testStatus.lastConfiguration) {
         runConfiguration(testStatus.lastConfiguration);
+    } else {
+        vscode.window.showErrorMessage('Last configuration doesn´t exist');
     }
 }
 
