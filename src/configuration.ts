@@ -8,5 +8,5 @@ const getConfig = () => vscode.workspace.getConfiguration().get(extensionName) a
 
 export function bundlerPath(): string {
     const config = getConfig();
-    return config ? config.bundlerPath : undefined || '${workspaceRoot}/bin/bundle';
+    return config.bundlerPath;
 }
