@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { runSpecFile, runSpecFileAtCurrentLine, runAllSpecsInProject, runLastConfiguration } from './specRunner';
+import * as debugRunner from './debugRunner';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -11,10 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "rspec-debug" is now active!');
 
-	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runActiveSpec', runSpecFile));
-	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runActiveSpecAtLine', runSpecFileAtCurrentLine));
-	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runAllSpecs', runAllSpecsInProject));
-	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runLastConfiguration', runLastConfiguration));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runActiveSpec', debugRunner.runSpecFile));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runActiveSpecAtLine', debugRunner.runSpecFileAtCurrentLine));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runAllSpecs', debugRunner.runAllSpecsInProject));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-debug.runLastConfiguration', debugRunner.runLastConfiguration));
 }
 
 // this method is called when your extension is deactivated

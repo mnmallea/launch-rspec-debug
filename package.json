@@ -44,7 +44,17 @@
 				"command": "rspec-debug.runLastConfiguration",
 				"title": "Rspec Debug: Run last configuration"
 			}
-		]
+		],
+		"configuration": {
+			"title": "Rspec Debug",
+			"properties": {
+				"rspec-debug.bundlerPath": {
+					"type": "string",
+					"default": "${workspaceRoot}/bin/bundle",
+					"description": "Path to bundler executable"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
