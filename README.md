@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/mnmallea/mnmallea/_apis/build/status/mnmallea.launch-rspec-debug?branchName=master)](https://dev.azure.com/mnmallea/mnmallea/_build/latest?definitionId=1&branchName=master)
 # rspec-debug README
 
 This is a Plugin designed to launch RSpec specs files in VSCode Debug Console.
